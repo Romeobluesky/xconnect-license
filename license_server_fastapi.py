@@ -1,8 +1,8 @@
+import os
+import mysql.connector
 from fastapi import FastAPI, Request
 from fastapi.responses import JSONResponse
-import mysql.connector
 from datetime import datetime
-import os
 from dotenv import load_dotenv
 
 # .env 파일 로드
@@ -53,6 +53,10 @@ async def check_license(request: Request):
 
         today = datetime.now().date()
         expiry = row["contract_end_date"]
+
+        # datetime 타입을 date 타입으로 변환
+        if isinstance(expiry, datetime):
+            expiry = expiry.date()
 
         if expiry < today:
             return JSONResponse(content={"result": False, "message": "License expired"})
