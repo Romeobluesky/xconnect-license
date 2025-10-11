@@ -40,7 +40,7 @@ async def check_license(request: Request):
         conn = get_db_connection()
         cursor = conn.cursor(dictionary=True)
         cursor.execute("""
-            SELECT license_no, contract_end_date, line_limit
+            SELECT license_no, contract_end_date, line_limit, status
             FROM companies
             WHERE license_no = %s
         """, (license_no,))
@@ -68,7 +68,8 @@ async def check_license(request: Request):
             "result": True,
             "message": "License valid",
             "contract_end_date": str(expiry),
-            "line_limit": row["line_limit"]
+            "line_limit": row["line_limit"],
+            "status": row["status"]
         })
 
     except Exception as e:

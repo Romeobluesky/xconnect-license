@@ -392,9 +392,17 @@ Content-Type: application/json
   "result": true,
   "message": "License valid",
   "contract_end_date": "2025-12-31",
-  "line_limit": 10
+  "line_limit": 10,
+  "status": "active"
 }
 ```
+
+**응답 필드 설명:**
+- `result` (boolean): 라이선스 검증 결과 (true/false)
+- `message` (string): 결과 메시지
+- `contract_end_date` (string): 계약 만료일 (YYYY-MM-DD 형식)
+- `line_limit` (integer): 허용된 최대 라인 수
+- `status` (string): 계정 상태 (예: "active", "inactive", "suspended" 등)
 
 **실패 응답 예시:**
 
