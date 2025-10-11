@@ -2,15 +2,21 @@ from fastapi import FastAPI, Request
 from fastapi.responses import JSONResponse
 import mysql.connector
 from datetime import datetime
+import os
+from dotenv import load_dotenv
+
+# .env 파일 로드
+load_dotenv()
 
 app = FastAPI(title="Recap Voice License API", version="1.0")
 
-# MySQL 연결 설정
+# MySQL 연결 설정 - 환경변수에서 로드
 DB_CONFIG = {
-    "host": "localhost",
-    "user": "xconnect_admin",             # 실제 사용자 계정으로 변경
-    "password": "$ujin1436",  # 실제 비밀번호로 변경
-    "database": "xconnect_admin" # 실제 DB 이름으로 변경
+    "host": os.getenv("DB_HOST"),
+    "user": os.getenv("DB_USER"),
+    "password": os.getenv("DB_PASSWORD"),
+    "database": os.getenv("DB_NAME"),
+    "port": int(os.getenv("DB_PORT", 3306))
 }
 
 def get_db_connection():
