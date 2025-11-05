@@ -382,7 +382,8 @@ Content-Type: application/json
 
 {
   "license_no": "ABC123",
-  "line_count": 5
+  "line_count": 5,
+  "client_ip": "123.23.45.1"
 }
 ```
 
@@ -436,12 +437,13 @@ Content-Type: application/json
 # 헬스체크
 curl http://127.0.0.1:3022/
 
-# 라이선스 검증
+# 라이선스 검증 예
 curl -X POST http://127.0.0.1:3022/check_license \
   -H "Content-Type: application/json" \
   -d '{
     "license_no": "ABC123",
-    "line_count": 5
+    "line_count": 5,
+    "client_ip": "123.23.45.1"
   }'
 ```
 
